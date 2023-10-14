@@ -1,0 +1,51 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="model.*" %>
+<div class="d-flex flex-column text-white bg-dark position-fixed" style="width: 250px; height: 100vh;">
+    <ul class="list-unstyled">
+        <li class="mb-1">
+            <a href='./' class="btn btn-dark w-100 ${param.classId == null ? 'active' : ''}" style="color: white;">
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="col-3">
+                        <span class='text-start fs-5'>Home</span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="mb-1">
+            <button class="btn btn-toggle btn-dark w-100" data-bs-toggle="collapse"
+                    data-bs-target="#dashboard-collapse" style="color: white;">
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+                    <div class="col-3">
+                        <span class='text-start fs-5'>Classes</span>
+                    </div>
+                </div>
+            </button>
+            <div class="collapse show" id="dashboard-collapse">
+                <ul class="list-unstyled overflow-y-auto" style="color: white; max-height: 60vh;">
+                    <c:forEach var="cl" items="${classList}">
+                        <li>
+                            <a href="./class?classId=${cl.classId}"
+                               class="btn btn-dark align-items-center w-100 ${cl.getClassId() == param.classId ? 'active' : ''}"
+                               style="font-size: medium; color: white; text-align: left;">
+                                <div class="row align-items-center ms-1">
+                                    <div class="col-2">
+                                        <i class="fa-solid fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="col-10">
+                                        <span class='text-start'>${cl.getClassName()}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
